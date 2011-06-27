@@ -42,10 +42,10 @@ def get_image_qm(url, todir):
     print 'Grabbing image from:', image
   
     title = re.findall(r'alt="([\w|\-|\s{1|2}]+)', good_stuff[0]).pop()
-    print title
   
     set_dir(todir)
     urllib.urlretrieve(image, title+'.jpg')
+    print title+'.jpg', 'Saved to:',todir
   except:
     print 'Error occured finding image', OSError
 

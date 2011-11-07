@@ -2,15 +2,12 @@
 #Josh Roppo
 #joshroppo@gmail.com
 
-
 import os
 import re
 import sys
 import urllib
 import urllib2
 import urlparse
-
-
 
 def read_url(url):
   """
@@ -29,13 +26,15 @@ def set_dir(todir):
     print 'Error setting directory:', OSError
 
 def get_image_qm(url, todir):
+  #print url
   """ Given the URL and directory, download the image page's html for parsing.
   Parse the full html to find the important bit concerning the image's actual host location but looking in the 'leftside' content div wrapper.
   Extract the image name and description to be used as the image's name.
   Download the image and save to the given directory!
   """
   try:
-    good_stuff = re.findall(r'<div id=\"leftside\">.*<img id="img"(.*)><\/div>', url)
+    #DOTALL mode must be specified in order to pull html
+    good_stuff = re.findall(r'<div id=\"leftside\">.*<div id=\"rightside\"', url, re.DOTALL)
     #print good_stuff 
   
     image = re.findall(r'src=\"(.*\.jpg)\"', good_stuff[0]).pop()
@@ -48,7 +47,6 @@ def get_image_qm(url, todir):
     print title+'.jpg', 'Saved to:',todir
   except:
     print 'Error occured finding image', OSError
-
 
 
 def main():  
@@ -87,9 +85,6 @@ def main():
   else:
     print 'Usage: http://qkme.me... OR --todir <full path to save directory> '
     sys.exit(-1)
-  
-
-
 
 if __name__ == '__main__':
   main()

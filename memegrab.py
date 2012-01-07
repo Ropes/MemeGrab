@@ -1,13 +1,10 @@
 #!/usr/bin/python
+#Python2.7.2
 #Josh Roppo
 #joshroppo@gmail.com
 
-import os
-import re
-import sys
-import urllib
-import urllib2
-import urlparse
+import os, re, sys
+import urllib, urllib2, urlparse
 
 def read_url(url):
   """

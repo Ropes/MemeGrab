@@ -6,6 +6,9 @@
 import os, re, sys
 import urllib, urllib2, urlparse
 
+#Define home folder
+home_folder = os.getenv('HOME') + "/"
+
 def read_url(url):
   """
   Take in a url and return all the HTML of the page.
@@ -52,15 +55,16 @@ def main():
   if len(args) == 1:
     #this functionality will be removed once more functionality is added.
     try:
-      file_ = open('setup.txt', 'r')
+      file_ = open(home_folder + '.config/memegrab', 'r')
       todir = file_.read()
       file_.close() 
     except:
       print 'Unable to read save directory, either not setup or missing: file will be saved to current directory.'
+      print home_folder
     get_image_qm(read_url(args[0]), todir)
   elif len(args) == 2:
     if args[0] == '--todir':
-      file_ = open('setup.txt', 'w')
+      file_ = open(home_folder + '.config/memegrab', 'w')
       try:
         os.chdir(args[1])
         file_.write(args[1])
@@ -70,7 +74,7 @@ def main():
     elif args[0] == '--qm':
       #The standard call to download images from quickmeme
       try:
-        file_ = open('setup.txt', 'r')
+        file_ = open(home_folder + '.config/memegrab', 'r')
         todir = file_.read()
         file_.close() 
       except:
